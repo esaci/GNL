@@ -6,7 +6,7 @@
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 21:50:46 by esaci             #+#    #+#             */
-/*   Updated: 2020/02/12 17:25:30 by esaci            ###   ########.fr       */
+/*   Updated: 2021/03/27 13:59:14 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_test(int fd, char **line, char *countb)
 {
-	if (line == 0 || BUFFER_SIZE < 1 || fd >= OPEN_MAX || fd < 0)
+	if (line == 0 || BUFFER_SIZE < 1 || fd >= FOPEN_MAX || fd < 0)
 		return (-'E');
 	if (!(*line = malloc(sizeof(char) * 1)))
 		return (-'E');
@@ -90,11 +90,12 @@ void	ft_fin(char *line, char *countu)
 
 int		get_next_line(int fd, char **line)
 {
-	static	char	countu[OPEN_MAX][BUFFER_SIZE + 2];
+	static	char	countu[FOPEN_MAX][BUFFER_SIZE + 2];
 	char			countb[BUFFER_SIZE + 1];
 	int				ct;
 	int				count2;
 
+	ct = 0;
 	if (ft_test(fd, line, countb) == -'E')
 		return (-1);
 	if (ft_flag(countu[fd]) == 1)
